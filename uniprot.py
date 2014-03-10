@@ -23,12 +23,14 @@ def retrieve(query, format='txt'):
 		possible formats:
 		txt, xml, rdf, fasta, gff"""
 	tool = 'batch/'
+	
+	query = query.split()
+	queries = [query[i:i+100] for i in xrange(0, len(query), 100)]
 
 	data = {'format':format}
-	files = {'file':query}
 
-	response = requests.post(url + tool, data=data, files=files)
-	page = response.text
+	responses = [requests.post(url + tool, data=data, files={'file':' '.join(query)}) for query in queries]
+	page = ''.join([response.text for response in responses])
 	return page
 
 def map(query, f, t, format='tab'):
