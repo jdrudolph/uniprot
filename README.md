@@ -13,32 +13,30 @@ mapping
 map a string of whitespace seperated entries from one format onto
 another using uniprots mapping api
 
-::
-  ~ map(...)
+    map(...)
 
-Args:
-  ~ query: to be mapped f: from ACC | P\_ENTREZGENEID | ... t: to ...
-    format: tab by default
-
-Help:
-  ~ for a list of all possible mappings visit
-    '[http://www.uniprot.org/faq/28](http://www.uniprot.org/faq/28)'
-
+> Args:
+>   ~ query: to be mapped f: from ACC | P\_ENTREZGENEID | ... t: to ...
+>     format: tab by default
+>
+> Help:
+>   ~ for a list of all possible mappings visit
+>     '[http://www.uniprot.org/faq/28](http://www.uniprot.org/faq/28)'
+>
 retrieval
 ---------
 
 retrieve uniprot entries from a string of whitespace seperated uniprot
 ids
 
-::
-  ~ retrieve(...)
+    retrieve(...)
 
-Args:
-  ~ query: to be mapped format: txt by default
-
-Help:
-  ~ possible formats: txt, xml, rdf, fasta, gff
-
+> Args:
+>   ~ query: to be mapped format: txt by default
+>
+> Help:
+>   ~ possible formats: txt, xml, rdf, fasta, gff
+>
 Installation
 ------------
 

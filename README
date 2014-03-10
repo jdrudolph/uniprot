@@ -14,6 +14,7 @@ map a string of whitespace seperated entries from one format onto
 another using uniprots mapping api
 
 ::
+
 		map(...)
     Args:
         query: to be mapped
@@ -33,6 +34,7 @@ retrieve uniprot entries from a string of whitespace seperated
 uniprot ids
 
 ::
+
 		retrieve(...)
     Args:
         query: to be mapped
