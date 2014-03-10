@@ -1,5 +1,5 @@
-uniprot
-=======
+uniprot\_tools
+==============
 
 uniprot provides a command-line and python interface to access the
 uniprot database
@@ -13,15 +13,16 @@ mapping
 map a string of whitespace seperated entries from one format onto
 another using uniprots mapping api
 
-    Args:
-        query: to be mapped
-        f: from ACC | P_ENTREZGENEID | ...
-        t: to ...
-        format: tab by default
+::
+  ~ map(...)
 
-    Help:
-        for a list of all possible mappings visit
-        'http://www.uniprot.org/faq/28'
+Args:
+  ~ query: to be mapped f: from ACC | P\_ENTREZGENEID | ... t: to ...
+    format: tab by default
+
+Help:
+  ~ for a list of all possible mappings visit
+    '[http://www.uniprot.org/faq/28](http://www.uniprot.org/faq/28)'
 
 retrieval
 ---------
@@ -29,30 +30,31 @@ retrieval
 retrieve uniprot entries from a string of whitespace seperated uniprot
 ids
 
-    Args:
-        query: to be mapped
-        format: txt by default
+::
+  ~ retrieve(...)
 
-    Help:
-        possible formats:
-        txt, xml, rdf, fasta, gff
+Args:
+  ~ query: to be mapped format: txt by default
+
+Help:
+  ~ possible formats: txt, xml, rdf, fasta, gff
 
 Installation
 ------------
 
 ### From pypi (recommended)
 
-    pip install uniprot_mapper
+    pip install uniprot_tools
 
 ### From source (UNIX) as standalone only
 
 Clone the git repository
 
-    git clone https://github.com/jdrudolph/uniprot_mapper.git
+    git clone https://github.com/jdrudolph/uniprot.git
 
 Use `distutils` to install the package
 
-    cd uniprot_mapper
+    cd uniprot
     sudo python setup.py install
 
 Example

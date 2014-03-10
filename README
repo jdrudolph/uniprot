@@ -1,5 +1,5 @@
-uniprot
-=======
+uniprot_tools
+=============
 uniprot provides a command-line and python interface
 to access the uniprot database
 
@@ -14,7 +14,7 @@ map a string of whitespace seperated entries from one format onto
 another using uniprots mapping api
 
 ::
-
+		map(...)
     Args:
         query: to be mapped
         f: from ACC | P_ENTREZGENEID | ...
@@ -33,7 +33,7 @@ retrieve uniprot entries from a string of whitespace seperated
 uniprot ids
 
 ::
-
+		retrieve(...)
     Args:
         query: to be mapped
         format: txt by default
@@ -51,7 +51,7 @@ From pypi (recommended)
 
 ::
 
-    pip install uniprot_mapper
+    pip install uniprot_tools
 
 From source (UNIX) as standalone only
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,13 +60,13 @@ Clone the git repository
 
 ::
 
-    git clone https://github.com/jdrudolph/uniprot_mapper.git
+    git clone https://github.com/jdrudolph/uniprot.git
 
 Use ``distutils`` to install the package
 
 ::
 
-    cd uniprot_mapper
+    cd uniprot
     sudo python setup.py install
 
 Example
