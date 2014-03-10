@@ -4,8 +4,7 @@ uniprot\_tools
 uniprot provides a command-line and python interface to access the
 uniprot database
 
-available services:
-  ~ map retrieve
+available services: map, retrieve
 
 mapping
 -------
@@ -14,15 +13,16 @@ map a string of whitespace seperated entries from one format onto
 another using uniprots mapping api
 
     map(...)
+    Args:
+        query: to be mapped
+        f: from ACC | P_ENTREZGENEID | ...
+        t: to ...
+        format: tab by default
 
-> Args:
->   ~ query: to be mapped f: from ACC | P\_ENTREZGENEID | ... t: to ...
->     format: tab by default
->
-> Help:
->   ~ for a list of all possible mappings visit
->     '[http://www.uniprot.org/faq/28](http://www.uniprot.org/faq/28)'
->
+    Help:
+        for a list of all possible mappings visit
+        'http://www.uniprot.org/faq/28'
+
 retrieval
 ---------
 
@@ -30,13 +30,14 @@ retrieve uniprot entries from a string of whitespace seperated uniprot
 ids
 
     retrieve(...)
+    Args:
+        query: to be mapped
+        format: txt by default
 
-> Args:
->   ~ query: to be mapped format: txt by default
->
-> Help:
->   ~ possible formats: txt, xml, rdf, fasta, gff
->
+    Help:
+        possible formats:
+        txt, xml, rdf, fasta, gff
+
 Installation
 ------------
 

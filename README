@@ -3,9 +3,7 @@ uniprot_tools
 uniprot provides a command-line and python interface
 to access the uniprot database
 
-available services:
-  map
-  retrieve
+available services: map, retrieve
 
 mapping
 -------
@@ -15,7 +13,7 @@ another using uniprots mapping api
 
 ::
 
-		map(...)
+    map(...)
     Args:
         query: to be mapped
         f: from ACC | P_ENTREZGENEID | ...
@@ -35,7 +33,7 @@ uniprot ids
 
 ::
 
-		retrieve(...)
+    retrieve(...)
     Args:
         query: to be mapped
         format: txt by default
