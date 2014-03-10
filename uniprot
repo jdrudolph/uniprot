@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+if __name__ == '__main__':
+	import argparse
+	import sys
+	import uniprot as uni 
+
+	parser = argparse.ArgumentParser(description='retrieve uniprot mapping')
+	subparsers = parser.add_subparsers(dest='tool')
+
+	mapping = subparsers.add_parser('map')
+	mapping.add_argument('f', help='from')
+	mapping.add_argument('t', help='to')
+	mapping.add_argument('inp', nargs='?', type=argparse.FileType('r'),
+			default=sys.stdin, help='input file (default: stdin)')
+	mapping.add_argument('out', nargs='?', type=argparse.FileType('w'),
+			default=sys.stdout, help='output file (default: stdout)')
+	mapping.add_argument('--format', default='tab', help='output format')
+
+	retrieve = subparsers.add_parser('retrieve')
+	retrieve.add_argument('inp', metavar = 'in', nargs='?', type=argparse.FileType('r'),
+			default=sys.stdin, help='input file (default: stdin)')
+	retrieve.add_argument('out', nargs='?', type=argparse.FileType('w'),
+			default=sys.stdout, help='output file (default: stdout)')
+	retrieve.add_argument('-f', '--format', help='specify output format', default='txt')
+
+	args = parser.parse_args()
+	query = args.inp.read()
+	print args	
+	if args.tool == 'map':
+		args.out.write(uni.map(query, args.f, args.t, args.format))
+
+	elif args.tool == 'retrieve':
+		args.out.write(uni.retrieve(query, format=args.format))
+		
+	exit(0)
