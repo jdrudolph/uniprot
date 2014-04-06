@@ -24,7 +24,7 @@ def retrieve(query, format='txt'):
 		txt, xml, rdf, fasta, gff"""
 	tool = 'batch/'
 	
-	query = query.split()
+	query = list(set(query.split()))
 	queries = [query[i:i+100] for i in xrange(0, len(query), 100)]
 
 	data = {'format':format}
