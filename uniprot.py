@@ -1,10 +1,10 @@
 """
-uniprot provides a command-line and python interface
+uniprot python interface
 to access the uniprot database
 
 available services:
-	map
-	retrieve
+    map
+    retrieve
 """
 
 import requests
@@ -12,65 +12,70 @@ import sys, argparse
 
 url = 'http://www.uniprot.org/'
 
-def retrieve(query, format='txt'):
-	""" request entries by uniprotid using batch retrieval
-	
-	Args:
-		query: to be mapped
-		format: txt by default
-		
-	Help:
-		possible formats:
-		txt, xml, rdf, fasta, gff"""
-	tool = 'batch/'
-	
-	query = list(set(query.split()))
-	queries = [query[i:i+100] for i in xrange(0, len(query), 100)]
+def _retrieve(query, format='txt'):
+    """_retrieve is not meant for use with the python interface, use `retrieve`
+    instead"""
+    tool = 'batch/'
 
-	data = {'format':format}
+    query = list(set(query.split()))
+    queries = [query[i:i+100] for i in xrange(0, len(query), 100)]
 
-	responses = [requests.post(url + tool, data=data, files={'file':' '.join(query)}) for query in queries]
-	page = ''.join([response.text for response in responses])
-	return page
+    data = {'format':format}
 
-def map(query, f, t, format='tab'):
-	""" map a string of whitespace seperated entries from
-	one format onto another using uniprots mapping api
-	
-	Args:
-		query: to be mapped
-		f: from ACC | P_ENTREZGENEID | ...
-		t: to ...
-		format: tab by default
-	
-	Help:
-		for a list of all possible mappings visit
-		'http://www.uniprot.org/faq/28'
-	"""
-	tool = 'mapping/'
+    responses = [requests.post(url + tool, data=data, files={'file':' '.join(query)}) for query in queries]
+    page = ''.join([response.text for response in responses])
+    return page
 
-	data = {
-			'from':f,
-			'to':t,
-			'format':format,
-			'query':query
-			}
-	response = requests.post(url + tool, data=data)
-	page = response.text
-	return page
+def retrieve(ids, format='txt'):
+    """ request entries by uniprot acc using batch retrieval
 
-if __name__ == '__main__':
-	
-	parser = argparse.ArgumentParser(description='retrieve uniprot mapping')
-	parser.add_argument('f', help='from')
-	parser.add_argument('t', help='to')
-	parser.add_argument('inp', nargs='?', type=argparse.FileType('r'),
-			default=sys.stdin, help='input file (default: stdin)')
-	parser.add_argument('out', nargs='?', type=argparse.FileType('w'),
-			default=sys.stdout, help='output file (default: stdout)')
-	parser.add_argument('--format', default='tab', help='output format')
-	
-	args = parser.parse_args()
+    Args:
+        query: list of ids to retrieve
+        format: txt by default
 
-	query = args.inp.read()
-	args.out.write(map(query, args.f, args.t))
+    Help:
+        possible formats:
+        txt, xml, rdf, fasta, gff"""
+    if type(ids) is not list:
+        ids = [ids]
+    return _retrieve(' '.join(ids), format)
+
+def _map(query, f, t, format='tab'):
+    """ _map is not meant for use with the python interface, use `map` instead
+    """
+    tool = 'mapping/'
+
+    data = {
+            'from':f,
+            'to':t,
+            'format':format,
+            'query':query
+            }
+    response = requests.post(url + tool, data=data)
+    page = response.text
+    return page
+
+def map(ids, f, t, format='tab'):
+    """ map a list of ids from one format onto another using uniprots mapping api
+    
+    Args:
+        query: id or list of ids to be mapped
+        f: from ACC | P_ENTREZGENEID | ...
+        t: to ...
+        format: tab by default
+
+    Help:
+        for a list of all possible mappings visit
+        'http://www.uniprot.org/faq/28'
+    """
+    if type(ids) is not list:
+        ids = [ids]
+    page = _map(' '.join(ids), f, t, format)
+    result = dict()
+    for row in page.splitlines()[1:]:
+        key, value = row.split('\t')
+        if key in result:
+            result[key].add(value)
+        else:
+            result[key] = set([value])
+    return result

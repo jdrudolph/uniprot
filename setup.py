@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name='uniprot_tools',
-		version='0.3',
+		version='0.4',
 		py_modules=['uniprot'],
 		scripts=['uniprot'],
 
