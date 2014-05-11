@@ -6,15 +6,11 @@ uniprot database
 
 available services: map, retrieve
 
-mapping
--------
-
-map a string of whitespace seperated entries from one format onto
-another using uniprots mapping api
-
-    map(...)
+**map**
+    map a list of ids from one format onto another using uniprots mapping api
+    
     Args:
-        query: to be mapped
+        query: id or list of ids to be mapped
         f: from ACC | P_ENTREZGENEID | ...
         t: to ...
         format: tab by default
@@ -22,16 +18,13 @@ another using uniprots mapping api
     Help:
         for a list of all possible mappings visit
         'http://www.uniprot.org/faq/28'
+    
 
-retrieval
----------
+**retrieve**
+    request entries by uniprot acc using batch retrieval
 
-retrieve uniprot entries from a string of whitespace seperated uniprot
-ids
-
-    retrieve(...)
     Args:
-        query: to be mapped
+        query: list of ids to retrieve
         format: txt by default
 
     Help:
@@ -84,5 +77,7 @@ will print the result to `stdout` which can be redirected further
 ### inside a python script
 
     import uniprot as uni
-    print uni.map('P31749', f='ACC', t='P_ENTREZGENEID')
+    print uni.map('P31749', f='ACC', t='P_ENTREZGENEID') # map single id
+    print uni.map(['P31749','Q16204'], f='ACC', t='P_ENTREZGENEID') # map list of ids
     print uni.retrieve('P31749')
+    print uni.retrieve(['P31749','Q16204'])

@@ -1,21 +1,18 @@
-uniprot_tools
-=============
-uniprot provides a command-line and python interface
-to access the uniprot database
+uniprot\_tools
+==============
+
+uniprot provides a command-line and python interface to access the
+uniprot database
 
 available services: map, retrieve
 
-mapping
--------
-
-map a string of whitespace seperated entries from one format onto
-another using uniprots mapping api
+**map** map a list of ids from one format onto another using uniprots
+mapping api
 
 ::
 
-    map(...)
     Args:
-        query: to be mapped
+        query: id or list of ids to be mapped
         f: from ACC | P_ENTREZGENEID | ...
         t: to ...
         format: tab by default
@@ -24,24 +21,17 @@ another using uniprots mapping api
         for a list of all possible mappings visit
         'http://www.uniprot.org/faq/28'
 
-
-retrieval
----------
-
-retrieve uniprot entries from a string of whitespace seperated
-uniprot ids
+**retrieve** request entries by uniprot acc using batch retrieval
 
 ::
 
-    retrieve(...)
     Args:
-        query: to be mapped
+        query: list of ids to retrieve
         format: txt by default
 
     Help:
         possible formats:
         txt, xml, rdf, fasta, gff
-
 
 Installation
 ------------
@@ -86,7 +76,8 @@ store them to ``map_file``.
 
     uniprot retrieve acc_file entries.txt
 
-Retrieve textual etries for all uniprot ids in ``acc_file`` and save to ``entries.txt``
+Retrieve textual etries for all uniprot ids in ``acc_file`` and save to
+``entries.txt``
 
 Using a pipe:
 
@@ -108,6 +99,8 @@ inside a python script
 ::
 
     import uniprot as uni
-    print uni.map('P31749', f='ACC', t='P_ENTREZGENEID')
+    print uni.map('P31749', f='ACC', t='P_ENTREZGENEID') # map single id
+    print uni.map(['P31749','Q16204'], f='ACC', t='P_ENTREZGENEID') # map list of ids
     print uni.retrieve('P31749')
+    print uni.retrieve(['P31749','Q16204'])
 
