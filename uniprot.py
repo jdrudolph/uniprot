@@ -18,7 +18,7 @@ def _retrieve(query, format='txt'):
     tool = 'batch/'
 
     query = list(set(query.split()))
-    queries = [query[i:i+100] for i in xrange(0, len(query), 100)]
+    queries = [query[i:i+100] for i in range(0, len(query), 100)]
 
     data = {'format':format}
 
